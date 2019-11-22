@@ -15,4 +15,4 @@ do
   fi
 done
 
-rm -rf $TMPDIl
+rm -rf $TMPDIR
