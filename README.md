@@ -16,7 +16,7 @@ This plugin allows to encrypt any data in the Kubernetes manifests so Kustomize 
 
 * Kustomize (tested with 3.2.1)
 * SOPS (tested with 3.4.0)
-* Bash and awk
+* Bash and awk (tested with GNU awk and MacOS 10.14 awk)
 
 ### Install
 
