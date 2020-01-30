@@ -4,13 +4,14 @@ set -e
 
 TMPDIR=$(mktemp -d)
 
-cat | awk -v TMPDIR=${TMPDIR} '{ OUTPUT=TMPDIR "/kustomize." (N++) ".yaml" } {print "---" > OUTPUT } {print >> OUTPUT }' RS='---'
+cat | awk -v TMPDIR=$TMPDIR '/---/{n++}{filename = TMPDIR "/kustomize" n ".yaml"; print >filename }'
 for f in ${TMPDIR}/*.yaml
 do
   if cat $f | grep -q "^sops:"; then
     echo "---"
     sops --ignore-mac -d $f 2> /dev/null
   else
+    echo "---"
     cat $f
   fi
 done
