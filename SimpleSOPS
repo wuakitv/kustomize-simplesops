@@ -4,7 +4,7 @@ set -e
 
 TMPDIR=$(mktemp -d)
 
-cat | awk -v TMPDIR=$TMPDIR '/---/{n++}{filename = TMPDIR "/kustomize" n ".yaml"; print >filename }'
+cat | awk -v TMPDIR=$TMPDIR '/---/{n++; close(filename)}{filename = TMPDIR "/kustomize" n ".yaml"; print >filename }'
 for f in ${TMPDIR}/*.yaml
 do
   if cat $f | grep -q "^sops:"; then
